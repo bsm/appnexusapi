@@ -18,8 +18,8 @@ describe AppnexusApi::PlacementService do
 
       # grab the default placement
       default_placement = placement_service.get(id: default_site.placements.first["id"]).first
-      default_placement.name.should  == "[Publisher Name] - Default"
-      default_placement.state.should == "active"
+      expect(default_placement.name).to  eq("[Publisher Name] - Default")
+      expect(default_placement.state).to eq("active")
 
       default_site.delete
       publisher.delete

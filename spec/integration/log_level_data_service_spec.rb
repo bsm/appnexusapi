@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AppnexusApi::LogLevelDataService do
   after(:each) do
-    system('rm standard_feed_2017_02_13_00_0.gz')
+    FileUtils.rm_f 'standard_feed_2017_02_13_00_0.gz'
   end
 
   it 'downloads new files' do

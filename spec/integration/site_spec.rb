@@ -19,11 +19,11 @@ describe AppnexusApi::SiteService do
       }
 
       new_site = site_service.create(new_site_url_params, new_site_params)
-      new_site.name.should == "Site Name"
-      new_site.code.should == site_code
-      new_site.url.should  == "http://www.example.com"
-      new_site.intended_audience.should == "general"
-      new_site.audited.should == true
+      expect(new_site.name).to eq("Site Name")
+      expect(new_site.code).to eq(site_code)
+      expect(new_site.url).to  eq("http://www.example.com")
+      expect(new_site.intended_audience).to eq("general")
+      expect(new_site.audited).to eq(true)
 
       new_site.delete
       publisher.delete

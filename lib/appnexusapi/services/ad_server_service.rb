@@ -1,9 +1,5 @@
 class AppnexusApi::AdServerService < AppnexusApi::ReadOnlyService
-  def name
-    "adserver"
-  end
-
-  def uri_suffix
-    "ad-server"
+  def initialize(connection, **opts)
+    super(connection, name: 'adserver', uri_suffix: 'ad-server', **opts)
   end
 end

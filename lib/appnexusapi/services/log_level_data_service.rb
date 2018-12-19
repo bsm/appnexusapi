@@ -12,18 +12,14 @@ module AppnexusApi
       end
     }.freeze
 
-    def initialize(connection, options = {})
-      @downloaded_files_path = options[:downloaded_files_path] || '.'
-      @siphon_name = options[:siphon_name] || DEFAULT_FEED
-      super(connection)
+    def initialize(connection, downloaded_files_path: '.', siphon_name: DEFAULT_FEED, **opts)
+      @downloaded_files_path = downloaded_files_path
+      @siphon_name = siphon_name
+      super(connection, uri_name: 'siphon', **opts)
     end
 
     def download_new_files_since(time = nil)
       since(time).map { |siphon| download_resource(siphon) }
-    end
-
-    def uri_name
-      'siphon'
     end
 
     def since(time = nil)

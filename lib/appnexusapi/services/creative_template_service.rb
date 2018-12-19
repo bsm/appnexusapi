@@ -1,10 +1,6 @@
 class AppnexusApi::CreativeTemplateService < AppnexusApi::Service
-  def name
-    "template"
-  end
-
-  def uri_suffix
-    name
+  def initialize(connection, **opts)
+    super(connection, name: 'template',  uri_suffix: 'template', **opts)
   end
 
   def delete(id)

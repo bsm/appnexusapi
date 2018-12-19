@@ -1,5 +1,5 @@
 class AppnexusApi::OperatingSystemExtendedService < AppnexusApi::ReadOnlyService
-  def plural_name
-    'operating-systems-extended'
+  def initialize(connection, **opts)
+    super(connection, plural_name: 'operating-systems-extended', **opts)
   end
 end

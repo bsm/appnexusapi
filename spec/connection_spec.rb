@@ -39,7 +39,7 @@ describe AppnexusApi::Connection do
       end
 
       before do
-        described_class.const_set('RATE_EXCEEDED_DEFAULT_TIMEOUT', 0)
+        stub_const("#{described_class}::RATE_EXCEEDED_DEFAULT_TIMEOUT", 0)
       end
 
       it 'retries 3 times' do

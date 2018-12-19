@@ -1,5 +1,5 @@
 class AppnexusApi::CategoryService < AppnexusApi::ReadOnlyService
-  def plural_name
-    "categories"
+  def initialize(connection, **opts)
+    super(connection, plural_name: 'categories', **opts)
   end
 end

@@ -1,31 +1,19 @@
 class AppnexusApi::Service
   DEFAULT_NUMBER_OF_ELEMENTS = 100
 
-  def initialize(connection)
-    @connection = connection
-  end
+  attr_reader :name, :plural_name, :uri_name, :plural_uri_name, :uri_suffix
 
-  def name
-    @name ||= begin
+  def initialize(connection, read_only: false, name: nil, plural_name: nil, uri_name: nil, plural_uri_name: nil, uri_suffix: nil)
+    @connection = connection
+    @name = name || begin
       str = self.class.name.split('::').last.sub(/Service\z/, '')
       str.gsub(/(.)([A-Z])/, '\1_\2').downcase
     end
-  end
-
-  def plural_name
-    name + 's'
-  end
-
-  def uri_name
-    name.gsub('_', '-')
-  end
-
-  def plural_uri_name
-    uri_name + 's'
-  end
-
-  def uri_suffix
-    uri_name
+    @plural_name = plural_name || "#{@name}s"
+    @uri_name = uri_name || @name.gsub('_', '-')
+    @plural_uri_name = plural_uri_name || @plural_name.gsub('_', '-')
+    @uri_suffix = uri_suffix || @uri_name
+    @read_only = read_only
   end
 
   def get(params = {})

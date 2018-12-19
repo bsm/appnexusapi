@@ -20,7 +20,7 @@ describe AppnexusApi::ProfileService do
       expect(profile.country_targets).to eq([{ "id"=>233,"code"=>"US", "name"=>"United States", "active"=>true }])
 
       new_line_item = line_item_service.create(advertiser_url_params, line_item_params.merge(profile_id: profile.id))
-      new_line_item.profile_id.should == profile.id
+      expect(new_line_item.profile_id).to eq(profile.id)
 
       new_line_item.delete({ "advertiser_id" => advertiser_id })
       advertiser.delete
