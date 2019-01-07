@@ -34,6 +34,20 @@ class AppnexusApi::Service
     responses
   end
 
+  # All returns an enumerator.
+  def all(params = {})
+    Enumerator.new do |y|
+      offset = 0
+      responses = get(params)
+
+      while responses.size > 0
+        responses.each {|x| y << x }
+        offset += responses.size
+        responses = get(params.merge('start_element' => offset))
+      end
+    end
+  end
+
   def create(route_params = {}, body = {})
     check_read_only!
     route = @connection.build_url(uri_suffix, route_params)
