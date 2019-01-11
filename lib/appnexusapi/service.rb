@@ -36,15 +36,15 @@ class AppnexusApi::Service
 
   # All returns an enumerator.
   def all(params = {})
-    Enumerator.new do |y|
-      offset = 0
-      responses = get(params)
+    Enumerator.new do |enum|
+      limit  = params.fetch('num_elements', DEFAULT_NUMBER_OF_ELEMENTS).to_i
+      offset = params.fetch('start_element', 0).to_i
 
-      while responses.size > 0
-        responses.each {|x| y << x }
-        offset += responses.size
+      begin
         responses = get(params.merge('start_element' => offset))
-      end
+        responses.each {|res| enum << res }
+        offset += responses.size
+      end until responses.size != limit
     end
   end
 

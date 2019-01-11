@@ -3,6 +3,7 @@ require 'pry'
 require 'logger'
 require 'vcr'
 require 'webmock'
+require 'rspec/its'
 require_relative '../lib/appnexusapi'
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
