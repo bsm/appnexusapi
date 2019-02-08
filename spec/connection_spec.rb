@@ -19,7 +19,7 @@ describe AppnexusApi::Connection do
     it 'returns data from expiration' do
       #stub to raise error the first time and then return []
       counter = 0
-      expect(subject).to receive(:login)
+      expect(subject).to receive(:login).twice
       expect(subject.connection).to receive(:run_request).twice do |arg|
         counter += 1
         raise AppnexusApi::Unauthorized.new if counter == 1
